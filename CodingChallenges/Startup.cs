@@ -15,6 +15,8 @@ using Microsoft.EntityFrameworkCore;
 using CodingChallenges.Domains.Users;
 using Microsoft.AspNetCore.Identity;
 using CodingChallenges.Helpers;
+using CodingChallenges.DataAcess.Repos;
+using CodingChallenges.Services;
 
 namespace CodingChallenges
 {
@@ -48,6 +50,10 @@ namespace CodingChallenges
             // DB Creation and Seeding
             services.AddTransient<IDatabaseInitializer, DatabaseInitializer>();
 
+            //Register Repository
+            services.AddTransient(typeof(IRepo<>), typeof(SqlRepo<>));
+
+            services.AddTransient(typeof(IEmployeeService), typeof(EmployeeService));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

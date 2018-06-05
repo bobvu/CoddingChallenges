@@ -17,6 +17,7 @@ namespace CodingChallenges.DataAcess.Repos
         TEntity Select(params object[] ids);
         TEntity Select(Expression<Func<TEntity, bool>> predicate);
         List<TEntity> SelectBy(Expression<Func<TEntity, bool>> predicate);
+        List<TEntity> GetAll();
         List<TEntity> SelectBy(Expression<Func<TEntity, bool>> predicate, string sortField, string sortBy, int skip, int take, out int total);
         void Delete(params object[] ids);
         void Delete(Expression<Func<TEntity, bool>> predicate);

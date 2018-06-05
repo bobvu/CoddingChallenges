@@ -35,6 +35,10 @@ namespace CodingChallenges.DataAcess.Repos
         {
             return _dbContext.Set<TEntity>().Where(predicate).ToList();
         }
+        public List<TEntity> GetAll() {
+
+            return _dbContext.Set<TEntity>().AsQueryable().ToList();
+        }
 
         public List<TEntity> SelectBy(Expression<Func<TEntity, bool>> predicate, string sortField, string sortBy
             , int skip, int take, out int total)

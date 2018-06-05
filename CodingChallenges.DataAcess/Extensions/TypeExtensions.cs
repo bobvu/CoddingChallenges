@@ -65,50 +65,50 @@ namespace CodingChallenges.DataAcess.Extensions
         /// <summary>
         /// Determines if a given type is a T, a nullable of T or a value type of T
         /// </summary>
-        public static bool IsStructOrValueType<T>(this Type type) where T : struct
-        {
-            return type.IsStructOrValueType(typeof(T));
-        }
+        //public static bool IsStructOrValueType<T>(this Type type) where T : struct
+        //{
+        //    return type.IsStructOrValueType(typeof(T));
+        //}
 
         /// <summary>
         /// Determines if a given type is a DateTime, including a nullable of DateTime or a value type of DateTime
         /// </summary>
-        public static bool IsDate(this Type type)
-        {
-            return type.IsStructOrValueType<DateTime>();
-        }
+        //public static bool IsDate(this Type type)
+        ////{
+        ////    return type.IsStructOrValueType<DateTime>();
+        ////}
 
         /// <summary>
         /// Determines if a given type is a Guid, including a nullable of Guid or a value type of Guid
         /// </summary>
-        public static bool IsGuid(this Type type)
-        {
-            return type.IsStructOrValueType<Guid>();
-        }
+        //public static bool IsGuid(this Type type)
+        //{
+        //    return type.IsStructOrValueType<Guid>();
+        //}
 
         /// <summary>
         /// Determines if a given type is an integer of any size, a nullable integer of any size or a value type of integer of any size
         /// </summary>
-        public static bool IsInteger(this Type type)
-        {
-            return
-                type.IsStructOrValueType<byte>() ||
-                type.IsStructOrValueType<short>() ||
-                type.IsStructOrValueType<int>() ||
-                type.IsStructOrValueType<long>();
-        }
+        //public static bool IsInteger(this Type type)
+        //{
+        //    return
+        //        type.IsStructOrValueType<byte>() ||
+        //        type.IsStructOrValueType<short>() ||
+        //        type.IsStructOrValueType<int>() ||
+        //        type.IsStructOrValueType<long>();
+        //}
 
         /// <summary>
         /// Determines if a given type is numeric, a nullable numeric or a numeric value type
         /// </summary>
-        public static bool IsNumeric(this Type type)
-        {
-            return
-                type.IsInteger() ||
-                type.IsStructOrValueType<float>() ||
-                type.IsStructOrValueType<double>() ||
-                type.IsStructOrValueType<decimal>();
-        }
+        //public static bool IsNumeric(this Type type)
+        //{
+        //    return
+        //        type.IsInteger() ||
+        //        type.IsStructOrValueType<float>() ||
+        //        type.IsStructOrValueType<double>() ||
+        //        type.IsStructOrValueType<decimal>();
+        //}
 
         public static bool ClosesGenericType(this Type closedType, Type genericType)
         {
