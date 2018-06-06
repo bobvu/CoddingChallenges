@@ -17,6 +17,8 @@ using Microsoft.AspNetCore.Identity;
 using CodingChallenges.Helpers;
 using CodingChallenges.DataAcess.Repos;
 using CodingChallenges.Services;
+using AutoMapper;
+using CodingChallenges.ViewModels;
 
 namespace CodingChallenges
 {
@@ -54,6 +56,11 @@ namespace CodingChallenges
             services.AddTransient(typeof(IRepo<>), typeof(SqlRepo<>));
 
             services.AddTransient(typeof(IEmployeeService), typeof(EmployeeService));
+
+            Mapper.Initialize(cfg =>
+            {
+                cfg.AddProfile<AutoMapperProfile>();
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

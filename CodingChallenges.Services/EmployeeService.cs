@@ -14,9 +14,25 @@ namespace CodingChallenges.Services
             _employeeRepo = employeeRepo;
         }
 
-        public IList<Employee> GetAll()
+        public List<Employee> GetAll()
         {
             return _employeeRepo.GetAll();
+        }
+
+        public List<EmployeeViewModel> FindStaff(List<EmployeeViewModel> employees, long managerId)
+        {
+            if (managerId > 0 && employees != null)
+            {
+                var staff = employees.FindAll(e => e.ManagerId == managerId);
+                foreach (var employee in staff)
+                {
+                    employee.Staff = FindStaff(employees, employee.EmployeeId);
+                }
+                return staff;
+            }else
+            {
+                return null;
+            }
         }
 
     }

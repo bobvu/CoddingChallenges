@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CodingChallenges.DataAcess\CodingChallenges.DataAcess.csproj" />
+    <ProjectReference Include="..\CodingChallenges.Domains\CodingChallenges.Domains.csproj" />
   </ItemGroup>
 
 </Project>

@@ -7,6 +7,7 @@ namespace CodingChallenges.Services
 {
     public interface IEmployeeService
     {
-         IList<Employee> GetAll();
+         List<Employee> GetAll();
+         List<EmployeeViewModel> FindStaff(List<EmployeeViewModel> employees, long managerId)
     }
 }
