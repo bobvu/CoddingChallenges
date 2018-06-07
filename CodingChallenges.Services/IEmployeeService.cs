@@ -8,6 +8,6 @@ namespace CodingChallenges.Services
     public interface IEmployeeService
     {
          List<Employee> GetAll();
-         List<EmployeeViewModel> FindStaff(List<EmployeeViewModel> employees, long managerId)
+        List<EmployeeViewModel> FindStaff(List<EmployeeViewModel> employees, long managerId);
     }
 }
