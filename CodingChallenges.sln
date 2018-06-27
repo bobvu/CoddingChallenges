@@ -3,15 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27703.2026
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodingChallenges", "CodingChallenges\CodingChallenges.csproj", "{8262A9BF-9C3C-4A43-BF6D-5C9CAAB6E531}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodingChallenges", "CodingChallenges\CodingChallenges.csproj", "{8262A9BF-9C3C-4A43-BF6D-5C9CAAB6E531}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodingChallenges.DataAcess", "CodingChallenges.DataAcess\CodingChallenges.DataAcess.csproj", "{AE1532B0-B1D0-414E-8A53-FEA0676F77A5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodingChallenges.DataAcess", "CodingChallenges.DataAcess\CodingChallenges.DataAcess.csproj", "{AE1532B0-B1D0-414E-8A53-FEA0676F77A5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodingChallenges.Models", "CodingChallenges.Models\CodingChallenges.Models.csproj", "{5882B7E0-F43A-462C-B344-BD291C94F988}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodingChallenges.Models", "CodingChallenges.Models\CodingChallenges.Models.csproj", "{5882B7E0-F43A-462C-B344-BD291C94F988}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodingChallenges.Domains", "CodingChallenges.Domains\CodingChallenges.Domains.csproj", "{7070E7C3-51D9-41DE-BB99-65A15B5C7092}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodingChallenges.Domains", "CodingChallenges.Domains\CodingChallenges.Domains.csproj", "{7070E7C3-51D9-41DE-BB99-65A15B5C7092}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodingChallenges.Services", "CodingChallenges.Services\CodingChallenges.Services.csproj", "{3B998065-E792-4FAD-BB0B-B8C840B508C9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodingChallenges.Services", "CodingChallenges.Services\CodingChallenges.Services.csproj", "{3B998065-E792-4FAD-BB0B-B8C840B508C9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoddingChallenges.Common", "CoddingChallenges.Common\CoddingChallenges.Common.csproj", "{3E1810B0-1A32-4610-927C-A3501B3C4FD0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{3B998065-E792-4FAD-BB0B-B8C840B508C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3B998065-E792-4FAD-BB0B-B8C840B508C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3B998065-E792-4FAD-BB0B-B8C840B508C9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3E1810B0-1A32-4610-927C-A3501B3C4FD0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E1810B0-1A32-4610-927C-A3501B3C4FD0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E1810B0-1A32-4610-927C-A3501B3C4FD0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E1810B0-1A32-4610-927C-A3501B3C4FD0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace CodingChallenges.DataAcess.DbContexts
 {
-    public class SqlContext : IdentityDbContext<User, IdentityRole<long>, long>
+    public class SqlContext : IdentityDbContext<User, Roles, long>
     {
         public SqlContext(DbContextOptions options) : base(options)
         { }
@@ -26,13 +26,14 @@ namespace CodingChallenges.DataAcess.DbContexts
             //    .ToTable("Users", "dbo").Property(p => p.Id).HasColumnName("User_Id");
             builder.Entity<User>()
                 .ToTable("Users", "dbo").Property(p => p.Id).HasColumnName("User_Id");
-            builder.Entity<IdentityRole<long>>()
+            builder.Entity<Roles>()
                 .ToTable("Roles", "dbo").Property(p => p.Id).HasColumnName("Role_Id");
             builder.Entity<IdentityUserRole<long>>(entity =>
-            {
+            {              
                 entity.ToTable("UserRoles", "dbo");
                 entity.Property(e => e.UserId).HasColumnName("User_Id");
                 entity.Property(e => e.RoleId).HasColumnName("Role_Id");
+                
 
             });
             builder.Entity<IdentityUserLogin<long>>(entity =>

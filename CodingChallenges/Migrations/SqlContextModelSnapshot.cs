@@ -36,6 +36,42 @@ namespace CodingChallenges.Migrations
                     b.ToTable("Employees");
                 });
 
+            modelBuilder.Entity("CodingChallenges.Domains.Users.Roles", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("Role_Id")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken();
+
+                    b.Property<string>("CreatedBy");
+
+                    b.Property<DateTime>("CreatedDate");
+
+                    b.Property<string>("Description");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(256);
+
+                    b.Property<string>("NormalizedName")
+                        .HasMaxLength(256);
+
+                    b.Property<string>("UpdatedBy");
+
+                    b.Property<DateTime>("UpdatedDate");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedName")
+                        .IsUnique()
+                        .HasName("RoleNameIndex")
+                        .HasFilter("[NormalizedName] IS NOT NULL");
+
+                    b.ToTable("Roles","dbo");
+                });
+
             modelBuilder.Entity("CodingChallenges.Domains.Users.User", b =>
                 {
                     b.Property<long>("Id")
@@ -47,6 +83,8 @@ namespace CodingChallenges.Migrations
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
+
+                    b.Property<string>("Configuration");
 
                     b.Property<string>("CreatedBy");
 
@@ -67,6 +105,8 @@ namespace CodingChallenges.Migrations
 
                     b.Property<bool>("ForceToReviewTermsCondition");
 
+                    b.Property<string>("FullName");
+
                     b.Property<byte>("Gender");
 
                     b.Property<bool>("IsActive");
@@ -77,9 +117,13 @@ namespace CodingChallenges.Migrations
 
                     b.Property<bool>("IsEmailVerified");
 
+                    b.Property<bool>("IsEnabled");
+
                     b.Property<bool>("IsTermsConditionAccepted");
 
                     b.Property<bool>("IsWelcomeEmailSent");
+
+                    b.Property<string>("JobTitle");
 
                     b.Property<string>("LastName");
 
@@ -131,32 +175,6 @@ namespace CodingChallenges.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("Users","dbo");
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole<long>", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnName("Role_Id")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken();
-
-                    b.Property<string>("Name")
-                        .HasMaxLength(256);
-
-                    b.Property<string>("NormalizedName")
-                        .HasMaxLength(256);
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("NormalizedName")
-                        .IsUnique()
-                        .HasName("RoleNameIndex")
-                        .HasFilter("[NormalizedName] IS NOT NULL");
-
-                    b.ToTable("Roles","dbo");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<long>", b =>
@@ -250,9 +268,145 @@ namespace CodingChallenges.Migrations
                     b.ToTable("UserTokens","dbo");
                 });
 
+            modelBuilder.Entity("OpenIddict.Models.OpenIddictApplication", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("ClientId")
+                        .IsRequired();
+
+                    b.Property<string>("ClientSecret");
+
+                    b.Property<string>("ConcurrencyToken")
+                        .IsConcurrencyToken();
+
+                    b.Property<string>("ConsentType");
+
+                    b.Property<string>("DisplayName");
+
+                    b.Property<string>("Permissions");
+
+                    b.Property<string>("PostLogoutRedirectUris");
+
+                    b.Property<string>("Properties");
+
+                    b.Property<string>("RedirectUris");
+
+                    b.Property<string>("Type")
+                        .IsRequired();
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ClientId")
+                        .IsUnique();
+
+                    b.ToTable("OpenIddictApplications");
+                });
+
+            modelBuilder.Entity("OpenIddict.Models.OpenIddictAuthorization", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("ApplicationId");
+
+                    b.Property<string>("ConcurrencyToken")
+                        .IsConcurrencyToken();
+
+                    b.Property<string>("Properties");
+
+                    b.Property<string>("Scopes");
+
+                    b.Property<string>("Status")
+                        .IsRequired();
+
+                    b.Property<string>("Subject")
+                        .IsRequired();
+
+                    b.Property<string>("Type")
+                        .IsRequired();
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ApplicationId");
+
+                    b.ToTable("OpenIddictAuthorizations");
+                });
+
+            modelBuilder.Entity("OpenIddict.Models.OpenIddictScope", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("ConcurrencyToken")
+                        .IsConcurrencyToken();
+
+                    b.Property<string>("Description");
+
+                    b.Property<string>("DisplayName");
+
+                    b.Property<string>("Name")
+                        .IsRequired();
+
+                    b.Property<string>("Properties");
+
+                    b.Property<string>("Resources");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Name")
+                        .IsUnique();
+
+                    b.ToTable("OpenIddictScopes");
+                });
+
+            modelBuilder.Entity("OpenIddict.Models.OpenIddictToken", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("ApplicationId");
+
+                    b.Property<string>("AuthorizationId");
+
+                    b.Property<string>("ConcurrencyToken")
+                        .IsConcurrencyToken();
+
+                    b.Property<DateTimeOffset?>("CreationDate");
+
+                    b.Property<DateTimeOffset?>("ExpirationDate");
+
+                    b.Property<string>("Payload");
+
+                    b.Property<string>("Properties");
+
+                    b.Property<string>("ReferenceId");
+
+                    b.Property<string>("Status");
+
+                    b.Property<string>("Subject")
+                        .IsRequired();
+
+                    b.Property<string>("Type")
+                        .IsRequired();
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ApplicationId");
+
+                    b.HasIndex("AuthorizationId");
+
+                    b.HasIndex("ReferenceId")
+                        .IsUnique()
+                        .HasFilter("[ReferenceId] IS NOT NULL");
+
+                    b.ToTable("OpenIddictTokens");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<long>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole<long>")
+                    b.HasOne("CodingChallenges.Domains.Users.Roles")
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -276,7 +430,7 @@ namespace CodingChallenges.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<long>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole<long>")
+                    b.HasOne("CodingChallenges.Domains.Users.Roles")
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -293,6 +447,24 @@ namespace CodingChallenges.Migrations
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("OpenIddict.Models.OpenIddictAuthorization", b =>
+                {
+                    b.HasOne("OpenIddict.Models.OpenIddictApplication", "Application")
+                        .WithMany("Authorizations")
+                        .HasForeignKey("ApplicationId");
+                });
+
+            modelBuilder.Entity("OpenIddict.Models.OpenIddictToken", b =>
+                {
+                    b.HasOne("OpenIddict.Models.OpenIddictApplication", "Application")
+                        .WithMany("Tokens")
+                        .HasForeignKey("ApplicationId");
+
+                    b.HasOne("OpenIddict.Models.OpenIddictAuthorization", "Authorization")
+                        .WithMany("Tokens")
+                        .HasForeignKey("AuthorizationId");
                 });
 #pragma warning restore 612, 618
         }

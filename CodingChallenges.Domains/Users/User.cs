@@ -53,7 +53,27 @@ namespace CodingChallenges.Domains.Users
         public string CreatedBy { get; set; }
         public string UpdatedBy { get; set; }
 
+        public virtual string FriendlyName
+        {
+            get
+            {
+                string friendlyName = string.IsNullOrWhiteSpace(FullName) ? UserName : FullName;
+
+                if (!string.IsNullOrWhiteSpace(JobTitle))
+                    friendlyName = $"{JobTitle} {friendlyName}";
+
+                return friendlyName;
+            }
+        }
+
+
+        public string JobTitle { get; set; }
+        public string FullName { get; set; }
+        public string Configuration { get; set; }
+        public bool IsEnabled { get; set; }
+        public bool IsLockedOut => this.LockoutEnabled && this.LockoutEnd >= DateTimeOffset.UtcNow;
         //[InverseProperty("ApplicationUser")]
         //public ApplicationUserProfile ApplicationUserProfile { get; set; }
+ 
     }
 }
