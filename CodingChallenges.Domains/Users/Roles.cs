@@ -6,7 +6,7 @@ using System.Text;
 namespace CodingChallenges.Domains.Users
 {
    
-    public class Roles : IdentityRole<long>, IAuditableEntity
+    public class Roles : IdentityRole, IAuditableEntity
     {
         /// <summary>
         /// Initializes a new instance of <see cref="Roles"/>.
@@ -60,9 +60,15 @@ namespace CodingChallenges.Domains.Users
 
 
 
+       
         /// <summary>
         /// Navigation property for the users in this role.
         /// </summary>
-      
+        public virtual ICollection<IdentityUserRole<string>> Users { get; set; }
+
+        /// <summary>
+        /// Navigation property for claims in this role.
+        /// </summary>
+        public virtual ICollection<IdentityRoleClaim<string>> Claims { get; set; }
     }
 }

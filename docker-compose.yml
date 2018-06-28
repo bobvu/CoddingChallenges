@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  codingchallenges:
+    image: ${DOCKER_REGISTRY}codingchallenges
+    build:
+      context: .
+      dockerfile: CodingChallenges/Dockerfile

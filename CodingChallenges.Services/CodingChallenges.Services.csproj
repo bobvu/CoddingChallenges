@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\CoddingChallenges.Common\CoddingChallenges.Common.csproj" />
     <ProjectReference Include="..\CodingChallenges.DataAcess\CodingChallenges.DataAcess.csproj" />
     <ProjectReference Include="..\CodingChallenges.Domains\CodingChallenges.Domains.csproj" />
   </ItemGroup>

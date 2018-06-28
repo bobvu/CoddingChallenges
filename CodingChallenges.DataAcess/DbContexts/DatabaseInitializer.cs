@@ -17,6 +17,7 @@ namespace CodingChallenges.DataAcess.DbContexts
     {
         private readonly SqlContext _context;
         private readonly ILogger _logger;
+        //private readonly IAccountService _accountManager;
 
         public DatabaseInitializer(SqlContext context, ILogger<DatabaseInitializer> logger)
         {

@@ -10,6 +10,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.DependencyInjection;
 using CodingChallenges.DataAcess.DbContexts;
 using CodingChallenges.Helpers;
+using CodingChallenges.Services;
 
 namespace CodingChallenges
 {
@@ -26,7 +27,7 @@ namespace CodingChallenges
                 var services = scope.ServiceProvider;
                 try
                 {
-                    var databaseInitializer = services.GetRequiredService<IDatabaseInitializer>();
+                    var databaseInitializer = services.GetRequiredService<IDatabaseInitializerService>();
                     databaseInitializer.SeedAsync().Wait();
                 }
                 catch (Exception ex)

@@ -148,12 +148,13 @@ namespace CodingChallenges
 
             // DB Creation and Seeding
             services.AddTransient<IDatabaseInitializer, DatabaseInitializer>();
+            services.AddTransient<IDatabaseInitializerService, DatabaseInitializerService>();
 
             //Register Repository
             services.AddTransient(typeof(IRepo<>), typeof(SqlRepo<>));
-
+            //Register services
             services.AddTransient(typeof(IEmployeeService), typeof(EmployeeService));
-
+            services.AddTransient(typeof(IAccountService), typeof(AccountService));
             Mapper.Initialize(cfg =>
             {
                 cfg.AddProfile<AutoMapperProfile>();

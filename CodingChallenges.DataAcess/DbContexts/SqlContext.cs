@@ -9,8 +9,9 @@ using Microsoft.AspNetCore.Identity;
 
 namespace CodingChallenges.DataAcess.DbContexts
 {
-    public class SqlContext : IdentityDbContext<User, Roles, long>
+    public class SqlContext : IdentityDbContext<User, Roles, string>
     {
+        public string CurrentUserId { get; set; }
         public SqlContext(DbContextOptions options) : base(options)
         { }
 
@@ -24,44 +25,38 @@ namespace CodingChallenges.DataAcess.DbContexts
             // Add your customizations after calling base.OnModelCreating(builder);
             //builder.Entity<IdentityUser<long>>()
             //    .ToTable("Users", "dbo").Property(p => p.Id).HasColumnName("User_Id");
-            builder.Entity<User>()
-                .ToTable("Users", "dbo").Property(p => p.Id).HasColumnName("User_Id");
-            builder.Entity<Roles>()
-                .ToTable("Roles", "dbo").Property(p => p.Id).HasColumnName("Role_Id");
-            builder.Entity<IdentityUserRole<long>>(entity =>
-            {              
-                entity.ToTable("UserRoles", "dbo");
-                entity.Property(e => e.UserId).HasColumnName("User_Id");
-                entity.Property(e => e.RoleId).HasColumnName("Role_Id");
-                
-
-            });
-            builder.Entity<IdentityUserLogin<long>>(entity =>
+            builder.Entity<User>(entity =>
             {
-                entity.ToTable("UserLogins", "dbo");
-                entity.Property(e => e.UserId).HasColumnName("User_Id");
-
+                entity.ToTable("Users", "dbo");
+                entity.HasMany(u => u.Claims).WithOne().HasForeignKey(c => c.UserId).IsRequired().OnDelete(DeleteBehavior.Cascade);
+                entity.HasMany(u => u.Roles).WithOne().HasForeignKey(r => r.UserId).IsRequired().OnDelete(DeleteBehavior.Cascade);
             });
-            builder.Entity<IdentityUserClaim<long>>(entity =>
+            builder.Entity<Roles>(entity => {
+                entity.ToTable("Roles", "dbo");
+                entity.HasMany(r => r.Claims).WithOne().HasForeignKey(c => c.RoleId).IsRequired().OnDelete(DeleteBehavior.Cascade); 
+                entity.HasMany(r => r.Users).WithOne().HasForeignKey(r => r.RoleId).IsRequired().OnDelete(DeleteBehavior.Cascade);
+            });
+            builder.Entity<IdentityUserRole<string>>(entity =>
+            {              
+                entity.ToTable("UserRoles", "dbo");                 
+            });
+            builder.Entity<IdentityUserLogin<string>>(entity =>
+            {
+                entity.ToTable("UserLogins", "dbo"); 
+            });
+            builder.Entity<IdentityUserClaim<string>>(entity =>
             {
                 entity.ToTable("UserClaims", "dbo");
-                entity.Property(e => e.UserId).HasColumnName("User_Id");
-                entity.Property(e => e.Id).HasColumnName("UserClaim_Id");
-
             });
 
-            builder.Entity<IdentityRoleClaim<long>>(entity =>
+            builder.Entity<IdentityRoleClaim<string>>(entity =>
             {
                 entity.ToTable("RoleClaims", "dbo");
-                entity.Property(e => e.Id).HasColumnName("RoleClaim_Id");
-                entity.Property(e => e.RoleId).HasColumnName("Role_Id");
             });
 
-            builder.Entity<IdentityUserToken<long>>(entity =>
+            builder.Entity<IdentityUserToken<string>>(entity =>
             {
                 entity.ToTable("UserTokens", "dbo");
-                entity.Property(e => e.UserId).HasColumnName("User_Id");
-
             });
             //builder.Entity<IdentityRole>().ToTable("MyRoles");
         }

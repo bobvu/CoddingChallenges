@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace CodingChallenges.Migrations
 {
-    public partial class FirstOpenIDTables : Migration
+    public partial class FirstOpenIDTablesChangebackToStringForIds : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -69,8 +69,7 @@ namespace CodingChallenges.Migrations
                 schema: "dbo",
                 columns: table => new
                 {
-                    Role_Id = table.Column<long>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Id = table.Column<string>(nullable: false),
                     Name = table.Column<string>(maxLength: 256, nullable: true),
                     NormalizedName = table.Column<string>(maxLength: 256, nullable: true),
                     ConcurrencyStamp = table.Column<string>(nullable: true),
@@ -82,7 +81,7 @@ namespace CodingChallenges.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Roles", x => x.Role_Id);
+                    table.PrimaryKey("PK_Roles", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -90,8 +89,7 @@ namespace CodingChallenges.Migrations
                 schema: "dbo",
                 columns: table => new
                 {
-                    User_Id = table.Column<long>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Id = table.Column<string>(nullable: false),
                     UserName = table.Column<string>(maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(maxLength: 256, nullable: true),
                     Email = table.Column<string>(maxLength: 256, nullable: true),
@@ -135,7 +133,7 @@ namespace CodingChallenges.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Users", x => x.User_Id);
+                    table.PrimaryKey("PK_Users", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -167,21 +165,21 @@ namespace CodingChallenges.Migrations
                 schema: "dbo",
                 columns: table => new
                 {
-                    RoleClaim_Id = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Role_Id = table.Column<long>(nullable: false),
+                    RoleId = table.Column<string>(nullable: false),
                     ClaimType = table.Column<string>(nullable: true),
                     ClaimValue = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_RoleClaims", x => x.RoleClaim_Id);
+                    table.PrimaryKey("PK_RoleClaims", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_RoleClaims_Roles_Role_Id",
-                        column: x => x.Role_Id,
+                        name: "FK_RoleClaims_Roles_RoleId",
+                        column: x => x.RoleId,
                         principalSchema: "dbo",
                         principalTable: "Roles",
-                        principalColumn: "Role_Id",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -190,21 +188,21 @@ namespace CodingChallenges.Migrations
                 schema: "dbo",
                 columns: table => new
                 {
-                    UserClaim_Id = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    User_Id = table.Column<long>(nullable: false),
+                    UserId = table.Column<string>(nullable: false),
                     ClaimType = table.Column<string>(nullable: true),
                     ClaimValue = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UserClaims", x => x.UserClaim_Id);
+                    table.PrimaryKey("PK_UserClaims", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_UserClaims_Users_User_Id",
-                        column: x => x.User_Id,
+                        name: "FK_UserClaims_Users_UserId",
+                        column: x => x.UserId,
                         principalSchema: "dbo",
                         principalTable: "Users",
-                        principalColumn: "User_Id",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -216,17 +214,17 @@ namespace CodingChallenges.Migrations
                     LoginProvider = table.Column<string>(nullable: false),
                     ProviderKey = table.Column<string>(nullable: false),
                     ProviderDisplayName = table.Column<string>(nullable: true),
-                    User_Id = table.Column<long>(nullable: false)
+                    UserId = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_UserLogins", x => new { x.LoginProvider, x.ProviderKey });
                     table.ForeignKey(
-                        name: "FK_UserLogins_Users_User_Id",
-                        column: x => x.User_Id,
+                        name: "FK_UserLogins_Users_UserId",
+                        column: x => x.UserId,
                         principalSchema: "dbo",
                         principalTable: "Users",
-                        principalColumn: "User_Id",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -235,25 +233,25 @@ namespace CodingChallenges.Migrations
                 schema: "dbo",
                 columns: table => new
                 {
-                    User_Id = table.Column<long>(nullable: false),
-                    Role_Id = table.Column<long>(nullable: false)
+                    UserId = table.Column<string>(nullable: false),
+                    RoleId = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UserRoles", x => new { x.User_Id, x.Role_Id });
+                    table.PrimaryKey("PK_UserRoles", x => new { x.UserId, x.RoleId });
                     table.ForeignKey(
-                        name: "FK_UserRoles_Roles_Role_Id",
-                        column: x => x.Role_Id,
+                        name: "FK_UserRoles_Roles_RoleId",
+                        column: x => x.RoleId,
                         principalSchema: "dbo",
                         principalTable: "Roles",
-                        principalColumn: "Role_Id",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_UserRoles_Users_User_Id",
-                        column: x => x.User_Id,
+                        name: "FK_UserRoles_Users_UserId",
+                        column: x => x.UserId,
                         principalSchema: "dbo",
                         principalTable: "Users",
-                        principalColumn: "User_Id",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -262,20 +260,20 @@ namespace CodingChallenges.Migrations
                 schema: "dbo",
                 columns: table => new
                 {
-                    User_Id = table.Column<long>(nullable: false),
+                    UserId = table.Column<string>(nullable: false),
                     LoginProvider = table.Column<string>(nullable: false),
                     Name = table.Column<string>(nullable: false),
                     Value = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UserTokens", x => new { x.User_Id, x.LoginProvider, x.Name });
+                    table.PrimaryKey("PK_UserTokens", x => new { x.UserId, x.LoginProvider, x.Name });
                     table.ForeignKey(
-                        name: "FK_UserTokens_Users_User_Id",
-                        column: x => x.User_Id,
+                        name: "FK_UserTokens_Users_UserId",
+                        column: x => x.UserId,
                         principalSchema: "dbo",
                         principalTable: "Users",
-                        principalColumn: "User_Id",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -348,10 +346,10 @@ namespace CodingChallenges.Migrations
                 filter: "[ReferenceId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_RoleClaims_Role_Id",
+                name: "IX_RoleClaims_RoleId",
                 schema: "dbo",
                 table: "RoleClaims",
-                column: "Role_Id");
+                column: "RoleId");
 
             migrationBuilder.CreateIndex(
                 name: "RoleNameIndex",
@@ -362,22 +360,22 @@ namespace CodingChallenges.Migrations
                 filter: "[NormalizedName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserClaims_User_Id",
+                name: "IX_UserClaims_UserId",
                 schema: "dbo",
                 table: "UserClaims",
-                column: "User_Id");
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserLogins_User_Id",
+                name: "IX_UserLogins_UserId",
                 schema: "dbo",
                 table: "UserLogins",
-                column: "User_Id");
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserRoles_Role_Id",
+                name: "IX_UserRoles_RoleId",
                 schema: "dbo",
                 table: "UserRoles",
-                column: "Role_Id");
+                column: "RoleId");
 
             migrationBuilder.CreateIndex(
                 name: "EmailIndex",

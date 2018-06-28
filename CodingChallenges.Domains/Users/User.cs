@@ -5,7 +5,7 @@ using System.Text;
 
 namespace CodingChallenges.Domains.Users
 {
-    public class User : IdentityUser<long>, IAuditableEntity
+    public class User : IdentityUser, IAuditableEntity
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -74,6 +74,15 @@ namespace CodingChallenges.Domains.Users
         public bool IsLockedOut => this.LockoutEnabled && this.LockoutEnd >= DateTimeOffset.UtcNow;
         //[InverseProperty("ApplicationUser")]
         //public ApplicationUserProfile ApplicationUserProfile { get; set; }
- 
+        /// <summary>
+        /// Navigation property for the roles this user belongs to.
+        /// </summary>
+        public virtual ICollection<IdentityUserRole<string>> Roles { get; set; }
+
+        /// <summary>
+        /// Navigation property for the claims this user possesses.
+        /// </summary>
+        public virtual ICollection<IdentityUserClaim<string>> Claims { get; set; }
+
     }
 }
